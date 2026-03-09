@@ -38,3 +38,9 @@ characters combined into string
 "line" event triggered
 ↓
 callback receives command
+
+next to do's:
+
+1. understand why we used particular type of loops.
+2. figure out the logic for type operation.
+3. refactor the code
