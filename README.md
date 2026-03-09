@@ -1,34 +1,40 @@
-[![progress-banner](https://backend.codecrafters.io/progress/shell/ca09df41-297b-4dee-96f6-58c2be3ab6d6)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
+/\*\*1.importing the readline module
+const readline = require("readline");
+readline module is build in node.js module
+//it allows a program to read input from terminal
+//t is commonly used to create interactive command-line applications.
 
-This is a starting point for JavaScript solutions to the
-["Build Your Own Shell" Challenge](https://app.codecrafters.io/courses/shell/overview).
+//\*\*2.creating the interface to communicate with terminal
+const rl = readline.createInterface({
+input: process.stdin,
+//standard input:the program reads what the user types.
+output: process.stdout,
+//standard output:the program prints output to the terminal.
+prompt: "$ ",
+//symbol which will get displayed before typing text
+});
 
-In this challenge, you'll build your own POSIX compliant shell that's capable of
-interpreting shell commands, running external programs and builtin commands like
-cd, pwd, echo and more. Along the way, you'll learn about shell command parsing,
-REPLs, builtin commands, and more.
+//this will prompt the symbol
+rl.prompt();
+prompt() is a method that displays the prompt symbol.
+It tells the program to wait for user input.
 
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
+//.on listens the line event which is emitted after presssing the enter
+rl.on("line", (command) => {
+console.log(`${command}: command not found `);
+});
+rl.on() is used to listen for events from the readline interface.
 
-# Passing the first stage
-
-The entry point for your `shell` implementation is in `app/main.js`. Study and
-uncomment the relevant code, then run the command below to execute the tests on
-our servers:
-
-```sh
-codecrafters submit
-```
-
-Time to move on to the next stage!
-
-# Stage 2 & beyond
-
-Note: This section is for stages 2 and beyond.
-
-1. Ensure you have `node (21)` installed locally
-1. Run `./your_program.sh` to run your program, which is implemented in
-   `app/main.js`.
-1. Commit your changes and run `git push origin master` to submit your solution
-   to CodeCrafters. Test output will be streamed to your terminal.
+User types → h e l l o
+↓
+stdin receives characters
+↓
+readline collects characters
+↓
+Enter pressed
+↓
+characters combined into string
+↓
+"line" event triggered
+↓
+callback receives command
