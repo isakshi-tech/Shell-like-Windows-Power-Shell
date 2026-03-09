@@ -1,6 +1,6 @@
 /\*\*1.importing the readline module
 const readline = require("readline");
-readline module is build in node.js module
+readline module is built in node.js module
 //it allows a program to read input from terminal
 //t is commonly used to create interactive command-line applications.
 
