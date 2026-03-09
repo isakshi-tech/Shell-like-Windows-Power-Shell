@@ -4,9 +4,9 @@ const rl = readline.createInterface({
   output: process.stdout,
   prompt: "$ ",
 });
-while (true) {
+rl.prompt();
+
+rl.on("line", (command) => {
+  console.log(`${command}: command not found `);
   rl.prompt();
-  rl.on("line", (command) => {
-    console.log(`${command}: command not found `);
-  });
-}
+});
