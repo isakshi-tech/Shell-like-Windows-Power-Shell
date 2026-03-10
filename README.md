@@ -42,5 +42,6 @@ callback receives command
 next to do's:
 
 1. understand why we used particular type of loops.
+   used if- else-if else because i had multiple conditions to check , and only one to implement at every enter
 2. figure out the logic for type operation.
-3. refactor the code
+   added the logic of type command

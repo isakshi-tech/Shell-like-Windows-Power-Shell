@@ -7,17 +7,6 @@ const rl = readline.createInterface({
 rl.prompt();
 
 rl.on("line", (command) => {
-  if (
-    command.slice(0, 4) === "echo" ||
-    command.slice(0, 4) === "type" ||
-    command.slice(0, 4) === "exit"
-  ) {
-    const text = command.slice(0, 4);
-    console.log(`${text} is a inbuilt command`);
-    rl.prompt();
-    return;
-  }
-
   if (command === "exit") {
     rl.close();
     return;
@@ -27,6 +16,18 @@ rl.on("line", (command) => {
     console.log(message);
     rl.prompt();
     return;
+  } else if (command.slice(0, 4) == "type") {
+    if (
+      command.slice(5) === "echo" ||
+      command.slice(5) === "type" ||
+      command.slice(5) === "exit"
+    ) {
+      console.log(`${command.slice(5)}  is a shell builtin`);
+      rl.prompt();
+    } else {
+      console.log(`${command.slice(5)}: not found`);
+      rl.prompt();
+    }
   } else {
     console.log(`${command}: command not found `);
     rl.prompt();
