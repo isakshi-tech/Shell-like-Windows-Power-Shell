@@ -1,4 +1,7 @@
 const readline = require("readline");
+const fs = require("fs");
+const path = require("path");
+
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -7,29 +10,55 @@ const rl = readline.createInterface({
 rl.prompt();
 
 rl.on("line", (command) => {
-  if (command === "exit") {
+  const trimmed = command.trim();
+
+  if (trimmed.startsWith("type ")) {
+    const arg = trimmed.slice(5);
+    const builtins = ["echo", "exit", "type"];
+    let found = false;
+    if (builtins.includes(arg)) {
+      console.log(`${arg} is a shell builtin`);
+      found = true;
+      rl.prompt();
+      return;
+    } else {
+      //logic for path
+      //1.read the path variable
+      const pathEnv = process.env.PATH; //nodes gives this automatically
+      const dirs = pathEnv.split(require("path").delimiter);
+      const exts = ["", ".exe", ".cmd", ".bat"];
+      for (const dir of dirs) {
+        for (const ext of exts) {
+          const fullPath = path.join(dir, arg + ext);
+
+          try {
+            fs.accessSync(fullPath, fs.constants.X_OK);
+            console.log(`${arg} is ${fullPath}`);
+            found = true;
+            break;
+          } catch {}
+        }
+        if (found) break;
+      }
+
+      if (!found) {
+        console.log(`${arg}: not found`);
+      }
+
+      rl.prompt();
+      return;
+    }
+  } else if (trimmed === "exit") {
     rl.close();
     return;
-  } else if (command.startsWith("echo")) {
-    const message = command.slice(5);
-
+  } else if (trimmed.startsWith("echo ")) {
+    const message = trimmed.slice(5);
     console.log(message);
+
     rl.prompt();
     return;
-  } else if (command.slice(0, 4) == "type") {
-    if (
-      command.slice(5) === "echo" ||
-      command.slice(5) === "type" ||
-      command.slice(5) === "exit"
-    ) {
-      console.log(`${command.slice(5)}  is a shell builtin`);
-      rl.prompt();
-    } else {
-      console.log(`${command.slice(5)}: not found`);
-      rl.prompt();
-    }
   } else {
-    console.log(`${command}: command not found `);
+    console.log(`${trimmed}: command not found`);
     rl.prompt();
   }
 });
