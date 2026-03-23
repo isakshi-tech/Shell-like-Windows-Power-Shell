@@ -1,0 +1,11 @@
+$env:PATH += ";D:\shell\shell-javascript\externalPrograms"
+this command adds the externalPrograms to the system environment
+
+dir "C:\Windows\System32" | where {$_.Extension -eq ".exe"}
+this command lists all the .exe files in the System32 directory, 
+which are the executable programs available in the system.
+
+echo $env:PATH?
+this command displays the current value of the PATH environment variable TO 
+verify that the externalPrograms directory has been added successfully.
+
