@@ -10,4 +10,5 @@ Works on Windows (handles .exe, .cmd, .bat)
 how to run this on you local system?
 1.clone the repository
 2.type the command npm run dev
-3
+3.follow the steps in demo
+4.experiment with new commands by creating your own.
