@@ -3,7 +3,6 @@ const fs = require("fs");
 const path = require("path");
 const { spawnSync } = require("child_process");
 
-// extracted path-search logic into one reusable function
 function findInPath(cmd) {
   const dirs = process.env.PATH.split(path.delimiter);
   const exts = ["", ".exe", ".cmd", ".bat"];
@@ -37,7 +36,7 @@ rl.on("line", (command) => {
     if (builtins.includes(arg)) {
       console.log(`${arg} is a shell builtin`);
     } else {
-      const found = findInPath(arg); // reusing function here
+      const found = findInPath(arg); 
       if (found) {
         console.log(`${arg} is ${found}`);
       } else {
@@ -55,7 +54,7 @@ rl.on("line", (command) => {
     const cmd = parts[0];
     const args = parts.slice(1);
 
-    const found = findInPath(cmd); // reusing function here
+    const found = findInPath(cmd); 
     if (!found) {
       console.log(`${cmd}: command not found`);
     } else {
