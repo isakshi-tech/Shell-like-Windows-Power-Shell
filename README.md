@@ -69,19 +69,3 @@ This project was built to understand:
 
 ---
 
-## 🚀 Getting Started
-
-### 1. Clone the repository
-
-````bash
-git clone <your-repo-link>
-### 2. install the dependencies
-``` bash
-npm
-
-### 3.execute the command
-```bash
-npm run dev
-
-
-````
